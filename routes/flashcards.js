@@ -2,6 +2,7 @@ const router = require("express").Router()
 const Flashcard = require("../models/flashcards.model")
 
 router.route("/").get((req, res) => {
+  console.log("get request")
   Flashcard.find()
     .then((flashcards) => res.json(flashcards))
     .catch((err) => res.status(400).json("Error: " + err))
