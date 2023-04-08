@@ -8,9 +8,14 @@ router.route("/").get((req, res) => {
 })
 
 router.route("/").post((req, res) => {
-  console.log(req.body)
   const question = req.body.question
   const answer = req.body.answer
+
+  router.route("/:id").delete((req, res) => {
+    Flashcard.findByIdAndDelete(req.params.id)
+      .then(() => res.json("Card deleted"))
+      .catch((err) => res.status(400).json("Error: " + err))
+  })
 
   const newFlashcard = new Flashcard({
     question,
