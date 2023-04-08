@@ -28,4 +28,18 @@ router.route("/:id").delete((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err))
 })
 
+router.route("/update/:id").post((req, res) => {
+  Flashcard.findById(req.params.id)
+    .then((card) => {
+      card.question = req.body.question
+      card.answer = req.body.answer
+
+      card
+        .save()
+        .then(() => res.json("Card updated!"))
+        .catch((err) => res.status(400).json("Error: " + err))
+    })
+    .catch((err) => res.status(400).json("Error: " + err))
+})
+
 module.exports = router
