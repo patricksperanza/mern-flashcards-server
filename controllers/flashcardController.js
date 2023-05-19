@@ -1,13 +1,15 @@
-const router = require("express").Router()
 const Flashcard = require("../models/flashcards.model")
+const mongoose = require("mongoose")
 
-router.route("/").get((req, res) => {
+// get all flashcards
+const getAllFlashcards = (req, res) => {
   Flashcard.find()
     .then((flashcards) => res.json(flashcards))
     .catch((err) => res.status(400).json("Error: " + err))
-})
+}
 
-router.route("/").post((req, res) => {
+// create new flashcard
+const createFlashcard = (req, res) => {
   const question = req.body.question
   const answer = req.body.answer
 
@@ -20,15 +22,17 @@ router.route("/").post((req, res) => {
     .save()
     .then(() => res.json("Flashcard added!"))
     .catch((err) => res.status(400).json("Error: " + err))
-})
+}
 
-router.route("/:id").delete((req, res) => {
+// Delete flashcard
+const deleteFlashcard = (req, res) => {
   Flashcard.findByIdAndDelete(req.params.id)
     .then(() => res.json("Card deleted"))
     .catch((err) => res.status(400).json("Error: " + err))
-})
+}
 
-router.route("/update/:id").post((req, res) => {
+// Update a flashcard
+const updateFlashcard = (req, res) => {
   Flashcard.findById(req.params.id)
     .then((card) => {
       card.question = req.body.question
@@ -40,6 +44,11 @@ router.route("/update/:id").post((req, res) => {
         .catch((err) => res.status(400).json("Error: " + err))
     })
     .catch((err) => res.status(400).json("Error: " + err))
-})
+}
 
-module.exports = router
+module.exports = {
+  getAllFlashcards,
+  createFlashcard,
+  deleteFlashcard,
+  updateFlashcard,
+}
