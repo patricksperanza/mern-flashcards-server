@@ -12,7 +12,6 @@ const loginUser = async (req, res) => {
   try {
     const user = await User.login(email, password)
 
-    if (user === "500") console.log("yippee")
     // Create token
     const token = createToken(user._id)
 
