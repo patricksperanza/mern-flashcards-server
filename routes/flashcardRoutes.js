@@ -6,6 +6,10 @@ const {
   deleteFlashcard,
   updateFlashcard,
 } = require("../controllers/flashcardController")
+const requireAuth = require("../middleware/requireAuth")
+
+// Require auth for all flashcard routes
+router.use(requireAuth)
 
 // GET flashcards
 router.get("/", getAllFlashcards)

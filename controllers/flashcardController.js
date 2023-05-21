@@ -3,7 +3,10 @@ const mongoose = require("mongoose")
 
 // get all flashcards
 const getAllFlashcards = (req, res) => {
-  Flashcard.find()
+  const user_id = req.user._id
+
+  Flashcard.find({ user_id })
+    .sort({ _id: -1 })
     .then((flashcards) => res.json(flashcards))
     .catch((err) => res.status(400).json("Error: " + err))
 }
@@ -12,12 +15,13 @@ const getAllFlashcards = (req, res) => {
 const createFlashcard = (req, res) => {
   const question = req.body.question
   const answer = req.body.answer
+  const user_id = req.user._id
 
   const newFlashcard = new Flashcard({
     question,
     answer,
+    user_id,
   })
-
   newFlashcard
     .save()
     .then(() => res.json("Flashcard added!"))
