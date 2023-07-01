@@ -4,7 +4,7 @@ Front End Flashcards is a full stack study application built using the MERN Stac
 
 ### **Live Site**
 
-[Front End Flashcards ![Markdown Logo](https://speranzadev.com/frontEndFlashcards.png)](https://front-endflashcards.netlify.app/)
+[Front End Flashcards ![Markdown Logo](https://speranzadev.com/fullStackFlashcards.png)](https://front-endflashcards.netlify.app/)
 
 ---
 
